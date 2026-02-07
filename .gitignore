@@ -39,3 +39,19 @@
 
 # debug information files
 *.dwo
+
+# Python
+.venv/
+__pycache__/
+
+# West
+.west/
+
+# Zephyr / west-managed repos
+zephyr/
+modules/
+bootloader/
+tools/
+
+# Build output
+build/
