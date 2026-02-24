@@ -1,4 +1,5 @@
 #pragma once
+
 #include <zephyr/logging/log.h>
 
 template <typename Driver> class Motor

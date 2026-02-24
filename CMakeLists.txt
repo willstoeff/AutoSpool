@@ -6,4 +6,7 @@ project(AutoSpool)
 
 target_include_directories(app PUBLIC inc)
 
-target_sources(app PRIVATE src/main.cpp src/drv8838.cpp)
+target_sources(app PRIVATE  src/main.cpp 
+                            src/drv8838.cpp 
+                            src/gpio.cpp
+                            src/shell.cpp)

@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "drv8838.hpp"
 #include <zephyr/logging/log.h>
+
+#include "drv8838.hpp"
 
 LOG_MODULE_REGISTER(pololu_driver);
 
@@ -10,10 +11,7 @@ PololuDriver::PololuDriver(uint8_t id):
     LOG_INF("pololu constructor'd");
 }
 
-PololuDriver::~PololuDriver()
-{
-
-}
+PololuDriver::~PololuDriver(){}
 
 void PololuDriver::init()
 {
