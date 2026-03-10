@@ -1,22 +1,24 @@
 / {
 	aliases {
-		led0 = &led0;
+		enable0 = &motor_enable;
+		phase0 = &motor_phase;
+		sleep0 = &motor_sleep;
 	};
 
-	leds {
+	outputs: outputs {
 		compatible = "gpio-leds";
 
-		led0: led_0 {
-			gpios = <&gpio9 0 GPIO_ACTIVE_HIGH>;
-			label = "Green LED 0";
+		motor_enable: enable {
+			gpios = <&gpioa 10 GPIO_ACTIVE_HIGH>;
+			label = "motor enable";
+		};
+		motor_phase: phase {
+			gpios = <&gpiob 3 GPIO_ACTIVE_HIGH>;
+			label = "motor sleep";
+		};
+		motor_sleep: sleep {
+			gpios = <&gpiob 4 GPIO_ACTIVE_HIGH>;
+			label = "motor sleep";
 		};
 	};
-};
-
-&gpiote130 {
-	status = "okay";
-};
-
-&gpio9 {
-	status = "okay";
-};
+};	

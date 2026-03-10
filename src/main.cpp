@@ -12,7 +12,7 @@ LOG_MODULE_REGISTER(main);
 int main(void)
 {
 	//init the IO
-	if (!led_init())
+	if (!gpio_init())
 	{
 		LOG_ERR("LED init failed");
 	}
