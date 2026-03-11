@@ -11,13 +11,12 @@ LOG_MODULE_REGISTER(main);
 
 int main(void)
 {
-	//init the IO
 	if (!gpio_init())
 	{
 		LOG_ERR("LED init failed");
 	}
 
-    PololuDriver driver(1);
+    PololuDriver driver(enable_pin, phase_pin, sleep_pin);
 	Motor<PololuDriver> pololu_driver(driver);
 	pololu_driver.init();
 	
