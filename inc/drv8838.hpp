@@ -13,11 +13,12 @@ class PololuDriver
         void init();
         void enable();
         void disable();
+        void setSpeed(uint8_t speed);
         void setDirection(uint8_t direction);
-        void setSpeed();
         void moveForward();
         void moveBackward();
         void sleep();
+        void wake();
 
     private:
         uint8_t _id;

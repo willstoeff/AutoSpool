@@ -18,44 +18,57 @@ PololuDriver::~PololuDriver(){}
 
 void PololuDriver::init()
 {
-    LOG_INF("pololu init");
-    //set GPIOs for dir, pwm, etc
+    LOG_INF("Pololu Init");
 }
 
 void PololuDriver::enable()
 {
-    LOG_INF("enable");
+    LOG_INF("Enable Driver");
+    gpio_pin_set_dt(&_sleep_pin, 0);
     gpio_pin_set_dt(&_enable_pin, 1);	
 }
 
 void PololuDriver::disable()
 {
-    LOG_INF("disable");
+    LOG_INF("Disable Driver");
     gpio_pin_set_dt(&_enable_pin, 0);
 }
 
-void PololuDriver::setDirection(uint8_t direction)
-{
-    LOG_INF("setDirection");
-}
-
-void PololuDriver::setSpeed()
+void PololuDriver::setSpeed(uint8_t speed)
 {
     LOG_INF("setSpeed");
 }
 
+void PololuDriver::setDirection(uint8_t direction)
+{
+    LOG_INF("Set Direction");
+    gpio_pin_set_dt(&_phase_pin, direction);
+}
+
 void PololuDriver::moveForward()
 {
-    LOG_INF("moveForward");
+    LOG_INF("Moving Forward");
+    disable();
+    setDirection(1);
+    enable();
 }
 
 void PololuDriver::moveBackward()
 {
-    LOG_INF("moveBackward");
+    LOG_INF("Moving Backward");
+    disable();
+    setDirection(0);
+    enable();
 }
 
 void PololuDriver::sleep()
 {
     LOG_INF("Sleep");
+    gpio_pin_set_dt(&_sleep_pin, 1);
 }
 
+void PololuDriver::wake()
+{
+    LOG_INF("Wake");
+    gpio_pin_set_dt(&_sleep_pin, 0);
+}
