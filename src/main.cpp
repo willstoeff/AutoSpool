@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <zephyr/kernel.h>
-#include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/pwm.h>
 
 #include "motor.hpp"
@@ -10,7 +10,9 @@
 
 LOG_MODULE_REGISTER(main);
 
-static const struct pwm_dt_spec pwm = PWM_DT_SPEC_GET(DT_NODELABEL(pwm_output));
+static const struct pwm_dt_spec servo = PWM_DT_SPEC_GET(DT_NODELABEL(pwm_output));
+static const uint32_t min_pulse = DT_PROP(DT_NODELABEL(pwm_output), min_pulse);
+static const uint32_t max_pulse = DT_PROP(DT_NODELABEL(pwm_output), max_pulse);
 
 int main(void)
 {
