@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <zephyr/logging/log.h>
-#include <zephyr/drivers/gpio.h>
 
 #include "drv8838.hpp"
 
