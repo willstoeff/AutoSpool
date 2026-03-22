@@ -51,7 +51,17 @@ int main(void)
     PololuDriver driver(enable_pin, phase_pin, sleep_pin);
 	Motor<PololuDriver> pololu_driver(driver);
 	pololu_driver.init();
-	
+	printk("Setting up PWM device\n");
+
+	if (1) 
+	{
+		printk("Error: PWM device %s is not reasdady\n", servo.dev->name);
+		return 0;
+	}
+
+	uint32_t pulse_width = max_pulse;
+	int ret = pwm_set_pulse_dt(&servo, pulse_width);
+
 	while (true) 
 	{
 		if(mf == true)
