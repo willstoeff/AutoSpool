@@ -14,7 +14,7 @@
 		};
 		motor_phase: phase {
 			gpios = <&gpiob 3 GPIO_ACTIVE_HIGH>;
-			label = "motor sleep";
+			label = "motor phase";
 		};
 		motor_sleep: sleep {
 			gpios = <&gpiob 4 GPIO_ACTIVE_HIGH>;
