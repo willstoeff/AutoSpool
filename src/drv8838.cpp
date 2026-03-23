@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/drivers/pwm.h>
 
 #include "drv8838.hpp"
 
@@ -7,8 +8,9 @@ LOG_MODULE_REGISTER(pololu_driver);
 
 PololuDriver::PololuDriver( const struct gpio_dt_spec enable_pin,
                             const struct gpio_dt_spec phase_pin,
-                            const struct gpio_dt_spec sleep_pin):
-    _enable_pin(enable_pin), _phase_pin(phase_pin), _sleep_pin(sleep_pin) 
+                            const struct gpio_dt_spec sleep_pin,
+                            const struct pwm_dt_spec pwm_pin):
+    _enable_pin(enable_pin), _phase_pin(phase_pin), _sleep_pin(sleep_pin), _pwm_pin(pwm_pin) 
 {
     LOG_INF("pololu constructor'd");
 }
@@ -33,9 +35,19 @@ void PololuDriver::disable()
     gpio_pin_set_dt(&_enable_pin, 0);
 }
 
-void PololuDriver::setSpeed(uint8_t speed)
+
+/**
+ * @brief Set the duty cycle in microseconds.
+ *
+ * @param speed On time or duty cycle (in microseconds) set to the PWM.
+ *
+ * @return Nothing yet
+ *
+ */
+void PololuDriver::setSpeed(uint32_t speed)
 {
     LOG_INF("setSpeed");
+    int ret = pwm_set_pulse_dt(&_pwm_pin, PWM_USEC(speed));
 }
 
 void PololuDriver::setDirection(uint8_t direction)

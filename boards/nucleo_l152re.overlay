@@ -24,8 +24,8 @@
 
 	pwm_output: pwm_output {
 		compatible = "pwm-servo";
-		pwms = <&pwm3 1 PWM_USEC(50) PWM_POLARITY_NORMAL>;
+		pwms = <&pwm3 1 PWM_USEC(10) PWM_POLARITY_NORMAL>;
 		min-pulse = <PWM_USEC(0)>;
-		max-pulse = <PWM_USEC(25)>;
+		max-pulse = <PWM_USEC(10)>;
 	};
 };	

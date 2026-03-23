@@ -32,7 +32,7 @@ template <typename Driver> class Motor
             _driver.init();
         }
 
-        void setSpeed(uint8_t speed)
+        void setSpeed(uint32_t speed)
         {
             LOG_MODULE_DECLARE(main);
             LOG_INF("Motor Set Speed");

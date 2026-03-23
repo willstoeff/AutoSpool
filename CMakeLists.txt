@@ -11,4 +11,5 @@ target_sources(app PRIVATE  src/main.cpp
                             src/drv8838.cpp 
                             src/gpio.cpp
                             src/heartbeat.cpp
+                            src/pwm.cpp
                             src/shell.cpp)
