@@ -36,7 +36,7 @@ static void heartbeat_entry(void*, void*, void*)
 
 void heartbeat_init()
 {
-    LOG_ERR("Starting Heartbeat");
+    LOG_INF("Starting Heartbeat");
     k_tid_t heartbeat_tid = k_thread_create(&heartbeat_thread, heartbeat_stack_area, K_THREAD_STACK_SIZEOF(heartbeat_stack_area),
                                             heartbeat_entry, NULL, NULL, NULL,
                                             HEARTBEAT_THREAD_PRIORITY, 0, K_NO_WAIT);

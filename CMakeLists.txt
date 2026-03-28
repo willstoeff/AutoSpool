@@ -12,4 +12,5 @@ target_sources(app PRIVATE  src/main.cpp
                             src/gpio.cpp
                             src/heartbeat.cpp
                             src/pwm.cpp
+                            src/message_queue.cpp
                             src/shell.cpp)
