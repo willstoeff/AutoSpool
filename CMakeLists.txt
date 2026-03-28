@@ -10,4 +10,5 @@ target_include_directories(app PUBLIC inc)
 target_sources(app PRIVATE  src/main.cpp 
                             src/drv8838.cpp 
                             src/gpio.cpp
+                            src/heartbeat.cpp
                             src/shell.cpp)
