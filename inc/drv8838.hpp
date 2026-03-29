@@ -25,6 +25,7 @@ class PololuDriver
 
     private:
         uint8_t _id;
+        uint8_t _speed;
         const struct gpio_dt_spec _enable_pin;
         const struct gpio_dt_spec _phase_pin;
         const struct gpio_dt_spec _sleep_pin;

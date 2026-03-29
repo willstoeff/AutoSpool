@@ -26,13 +26,13 @@ void PololuDriver::enable()
 {
     LOG_INF("Enable Driver");
     gpio_pin_set_dt(&_sleep_pin, 0);
-    gpio_pin_set_dt(&_enable_pin, 1);	
+    int ret = pwm_set_pulse_dt(&_pwm_pin, PWM_USEC(_speed));
 }
 
 void PololuDriver::disable()
 {
     LOG_INF("Disable Driver");
-    gpio_pin_set_dt(&_enable_pin, 0);
+    int ret = pwm_set_pulse_dt(&_pwm_pin, PWM_USEC(0));
 }
 
 
@@ -46,8 +46,8 @@ void PololuDriver::disable()
  */
 void PololuDriver::setSpeed(uint32_t speed)
 {
-    LOG_INF("setSpeed");
-    int ret = pwm_set_pulse_dt(&_pwm_pin, PWM_USEC(speed));
+    LOG_INF("Setting on time to %dus", speed);
+    _speed = speed;
 }
 
 void PololuDriver::setDirection(uint8_t direction)
@@ -76,6 +76,7 @@ void PololuDriver::sleep()
 {
     LOG_INF("Sleep");
     gpio_pin_set_dt(&_sleep_pin, 1);
+    disable();
 }
 
 void PololuDriver::wake()

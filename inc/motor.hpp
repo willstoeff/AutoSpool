@@ -2,15 +2,16 @@
 
 #include <zephyr/logging/log.h>
 
+enum Motor_Direction: uint8_t
+{
+    MOTOR_FORWARD = 0x00,
+    MOTOR_BACKWARD,
+    MOTOR_DIRECTION_ERROR
+};
+
 template <typename Driver> class Motor
 {
     public:
-        enum Motor_Direction: uint8_t
-        {
-            MOTOR_FORWARD = 0x00,
-            MOTOR_BACKWARD,
-            MOTOR_DIRECTION_ERROR
-        };
 
         enum Motor_Error: uint8_t
         {
@@ -59,6 +60,27 @@ template <typename Driver> class Motor
             }
 
             _driver.setDirection(dir);
+        }
+
+        int move(Motor_Direction direction)
+        {
+            LOG_MODULE_DECLARE(main);
+            LOG_INF("Motor Move");
+            int ret = 0;
+            if (direction == MOTOR_FORWARD)
+            {
+                moveForward();
+            }
+            else if (direction == MOTOR_BACKWARD)
+            {
+                moveBackward();
+            }
+            else
+            {
+                LOG_ERR("Invalid Direction: %d", direction);
+                ret = 1;
+            }
+            return ret;
         }
 
         void moveForward()

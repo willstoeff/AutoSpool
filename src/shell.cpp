@@ -21,20 +21,47 @@ SHELL_CMD_REGISTER(sub_motor, NULL, "Toggle LED", toggle_device_led);
 static int cmd_motor_move(const struct shell *sh, size_t argc, char **argv)
 {
     int ret = 0;
-
-    // shell_print(sh, "argc = %d", argc);
+    motor_msg_t msg;
+    char buffer[9] = {};
+    
     if (argc < 2)
     {
         shell_print(sh, "Must enter a direction \"Forward\" or \"Backward\"");
         ret = -1;
     }
+    else
+    {
+        snprintf(buffer, sizeof(buffer), "%s", argv[1]);
+        if (!strcmp(buffer, "Forward"))
+        {
+            msg.data_type = MOTOR_MOVE;
+            msg.data = 0;
+        }
+        else if(!strcmp(buffer, "Backward"))
+        {
+            msg.data_type = MOTOR_MOVE;
+            msg.data = 1;
+        }
+        else
+        {
+            shell_print(sh, "Invalid Direction: %s", argv[1]);
+            ret = -1;
+        }
 
-    return 0;
+        if (!ret)
+        {
+            k_msgq_put(&motor_msgq, &msg, K_NO_WAIT);
+        }
+    }
+    // LOG_ERR("str: %s", arg[1]);
+    shell_print(sh, "str: %s", argv[1]);
+    return ret;
 }
 
 static int cmd_motor_set_speed(const struct shell *sh, size_t argc, char **argv)
 {
     int ret = 0;
+    motor_msg_t msg;
 
     if (argc < 2)
     {
@@ -51,8 +78,9 @@ static int cmd_motor_set_speed(const struct shell *sh, size_t argc, char **argv)
         }
         else
         {
-            shell_print(sh, "Good val");
-        //     // mqg_q;
+            msg.data_type = MOTOR_SPEED;
+            msg.data = speed;
+            k_msgq_put(&motor_msgq, &msg, K_NO_WAIT);
         }
     }
 
@@ -61,9 +89,15 @@ static int cmd_motor_set_speed(const struct shell *sh, size_t argc, char **argv)
 
 static int cmd_motor_sleep(const struct shell *sh, size_t argc, char **argv)
 {
+    int ret = 0;
+    motor_msg_t msg;
 
+    msg.data_type = MOTOR_SLEEP; 
+    msg.data = 1; 
+
+    k_msgq_put(&motor_msgq, &msg, K_NO_WAIT);
     shell_print(sh, "Motor set to IDLE");
-    return 0;
+    return ret;
 }
 
 SHELL_STATIC_SUBCMD_SET_CREATE(sub_motor,

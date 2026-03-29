@@ -9,15 +9,10 @@ LOG_MODULE_REGISTER(main);
 
 static bool inc_speed = false;
 
-int update_speed()
-{
-	inc_speed = true;
-	return true;
-}
-
 int main(void)
 {
 	heartbeat_init();
+	message_queue_init();
 
 	if (!gpio_init())
 	{
@@ -29,20 +24,27 @@ int main(void)
 	pololu_driver.init();
 
 	static uint32_t speed = 0;
-
+	motor_msg_t msg;
 	while (true) 
 	{
-		if(inc_speed)
+		while (1) 
 		{
-			inc_speed = false;
-			speed += 2;
-			if (speed > 10) 
+        	k_msgq_get(&motor_msgq, &msg, K_FOREVER);
+			switch (msg.data_type)
 			{
-				speed = 0;
+				case MOTOR_MOVE:
+					pololu_driver.move(static_cast<Motor_Direction>(msg.data));
+					break;
+				case MOTOR_SPEED:
+					pololu_driver.setSpeed(msg.data);
+					break;
+				case MOTOR_SLEEP:
+					pololu_driver.sleep();
+					break;
+				default:
+					LOG_ERR("Invalid Command: %d", msg.data_type);
 			}
-			pololu_driver.setSpeed(speed);
 		}
-		k_sleep(K_MSEC(1));
 	}
 
 	return 0;
