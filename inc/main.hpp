@@ -1,3 +1,11 @@
+/**
+ * @file main.hpp
+ * @brief Header file for main.cpp
+ *
+ * @author William Stoeffhaas
+ * @date 4/2/26
+ */
+
 #pragma once
 
 #include "motor.hpp"
@@ -6,5 +14,3 @@
 #include "heartbeat.hpp"
 #include "pwm.hpp"
 #include "message_queue.hpp"
-
-int update_speed();

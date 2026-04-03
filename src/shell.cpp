@@ -2,7 +2,6 @@
  * @file shell.cpp
  * @brief 
  *
- *
  * @author William Stoeffhaas
  * @date 3/28/26
  */
@@ -53,7 +52,6 @@ static int cmd_motor_move(const struct shell *sh, size_t argc, char **argv)
             k_msgq_put(&motor_msgq, &msg, K_NO_WAIT);
         }
     }
-    // LOG_ERR("str: %s", arg[1]);
     shell_print(sh, "str: %s", argv[1]);
     return ret;
 }

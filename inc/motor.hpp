@@ -1,3 +1,11 @@
+/**
+ * @file motor.hpp
+ * @brief Motor template class
+ *
+ * @author William Stoeffhaas
+ * @date 4/2/26
+ */
+
 #pragma once
 
 #include <zephyr/logging/log.h>

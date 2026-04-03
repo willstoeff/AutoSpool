@@ -2,7 +2,6 @@
  * @file message_queue.hpp
  * @brief Header file for message_queue.cpp
  *
- *
  * @author William Stoeffhaas
  * @date 3/28/26
  */
@@ -25,4 +24,7 @@ struct motor_msg_t
     uint32_t data;
 };
 
-int message_queue_init();
+/**
+ * @brief Initialize message queues
+ */
+void message_queue_init();
