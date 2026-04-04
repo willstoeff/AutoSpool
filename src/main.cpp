@@ -25,8 +25,8 @@ int main(void)
 		LOG_ERR("GPIO init failed");
 	}
 
-    PololuDriver driver(enable_pin, phase_pin, sleep_pin, pwm);
-	Motor<PololuDriver> pololu_driver(driver);
+    PololuDriver pololu_driver(enable_pin, phase_pin, sleep_pin, pwm);
+	Motor<PololuDriver> driver(pololu_driver);
 	pololu_driver.init();
 
 	motor_msg_t msg;
@@ -36,13 +36,13 @@ int main(void)
 		switch (msg.data_type)
 		{
 			case MOTOR_MOVE:
-				pololu_driver.move(static_cast<Motor_Direction>(msg.data));
+				driver.move(static_cast<Motor_Direction>(msg.data));
 				break;
 			case MOTOR_SPEED:
-				pololu_driver.setSpeed(msg.data);
+				driver.setSpeed(msg.data);
 				break;
 			case MOTOR_SLEEP:
-				pololu_driver.sleep();
+				driver.sleep();
 				break;
 			default:
 				LOG_ERR("Invalid Command: %d", msg.data_type);

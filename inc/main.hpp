@@ -9,6 +9,7 @@
 #pragma once
 
 #include "motor.hpp"
+#include "motor_types.hpp"
 #include "drv8838.hpp"
 #include "gpio.hpp"
 #include "heartbeat.hpp"

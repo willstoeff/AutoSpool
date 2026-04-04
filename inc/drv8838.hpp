@@ -4,6 +4,8 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/pwm.h>
 
+#include "motor_types.hpp"
+
 class PololuDriver
 {
     public:
@@ -17,18 +19,19 @@ class PololuDriver
         void enable();
         void disable();
         void setSpeed(uint32_t speed);
-        void setDirection(uint8_t direction);
+        void setDirection(Motor_Direction direction);
         void moveForward();
         void moveBackward();
         void sleep();
         void wake();
 
     private:
-        uint8_t _id;
-        uint8_t _speed;
-        const struct gpio_dt_spec _enable_pin;
-        const struct gpio_dt_spec _phase_pin;
-        const struct gpio_dt_spec _sleep_pin;
-        const struct pwm_dt_spec _pwm_pin;
+        Motor_State state_;
+        uint8_t id_;
+        uint8_t speed_;
+        const struct gpio_dt_spec enable_pin_;
+        const struct gpio_dt_spec phase_pin_;
+        const struct gpio_dt_spec sleep_pin_;
+        const struct pwm_dt_spec pwm_pin_;
 
 };

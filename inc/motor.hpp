@@ -10,17 +10,11 @@
 
 #include <zephyr/logging/log.h>
 
-enum Motor_Direction: uint8_t
-{
-    MOTOR_FORWARD = 0x00,
-    MOTOR_BACKWARD,
-    MOTOR_DIRECTION_ERROR
-};
+#include "motor_types.hpp"
 
 template <typename Driver> class Motor
 {
     public:
-
         enum Motor_Error: uint8_t
         {
             MOTOR_NO_ERROR = 0x00,
