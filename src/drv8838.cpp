@@ -25,7 +25,7 @@ void PololuDriver::init()
 void PololuDriver::enable()
 {
     LOG_INF("Enable Driver");
-    gpio_pin_set_dt(&_sleep_pin, 0);
+    gpio_pin_set_dt(&_sleep_pin, 1);
     int ret = pwm_set_pulse_dt(&_pwm_pin, PWM_USEC(_speed));
 }
 
@@ -75,12 +75,12 @@ void PololuDriver::moveBackward()
 void PololuDriver::sleep()
 {
     LOG_INF("Sleep");
-    gpio_pin_set_dt(&_sleep_pin, 1);
+    gpio_pin_set_dt(&_sleep_pin, 0);
     disable();
 }
 
 void PololuDriver::wake()
 {
     LOG_INF("Wake");
-    gpio_pin_set_dt(&_sleep_pin, 0);
+    gpio_pin_set_dt(&_sleep_pin, 1);
 }

@@ -1,3 +1,4 @@
+// nucleo_l152re.dts
 / {
 	aliases {
 		enable0 = &motor_enable;
